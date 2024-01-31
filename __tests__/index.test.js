@@ -10,7 +10,7 @@ const __dirname = dirname(__filename);
 const getFixturePath = (filepath) => path.join(__dirname, '..', '__fixtures__', filepath);
 const readFile = (filepath) => readFileSync(getFixturePath(filepath), 'utf-8');
 
-const expected = readFile('expected.txt');
+const expected = readFile('expectedStylish.txt');
 
 test.each(['json', 'yaml', 'yml'])('genDiff-test', (extension) => {
   const fileBefore = getFixturePath(`file1.${extension}`);
