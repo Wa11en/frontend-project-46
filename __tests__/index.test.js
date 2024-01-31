@@ -13,7 +13,7 @@ const readFile = (filepath) => readFileSync(getFixturePath(filepath), 'utf-8');
 const expected = readFile('expected.txt');
 
 test.each(['json', 'yaml', 'yml'])('genDiff-test', (extension) => {
-  const fileBefore = `__fixtures__/file1.${extension}`;
-  const fileAfter = `__fixtures__/file2.${extension}`;
+  const fileBefore = getFixturePath(`file1.${extension}`);
+  const fileAfter = getFixturePath(`file2.${extension}`);
   expect(genDiff(fileBefore, fileAfter)).toEqual(expected);
 });
