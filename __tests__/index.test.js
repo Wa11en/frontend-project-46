@@ -1,4 +1,3 @@
-import { test, expect } from '@jest/globals';
 import { fileURLToPath } from 'url';
 import { readFileSync } from 'fs';
 import path, { dirname } from 'path';
@@ -10,10 +9,12 @@ const __dirname = dirname(__filename);
 const getFixturePath = (filepath) => path.join(__dirname, '..', '__fixtures__', filepath);
 const readFile = (filepath) => readFileSync(getFixturePath(filepath), 'utf-8');
 
-const expected = readFile('expectedStylish.txt');
+const expectedStylish = readFile('expectedStylish.txt');
+const expectedPlain = readFile('expectedPlain.txt');
 
 test.each(['json', 'yaml', 'yml'])('genDiff-test', (extension) => {
-  const fileBefore = getFixturePath(`file1.${extension}`);
-  const fileAfter = getFixturePath(`file2.${extension}`);
-  expect(genDiff(fileBefore, fileAfter)).toEqual(expected);
+  const firstFile = getFixturePath(`file1.${extension}`);
+  const secondFile = getFixturePath(`file2.${extension}`);
+  expect(genDiff(firstFile, secondFile)).toEqual(expectedStylish);
+  expect(genDiff(firstFile, secondFile, 'plain')).toEqual(expectedPlain);
 });
