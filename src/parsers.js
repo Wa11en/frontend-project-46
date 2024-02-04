@@ -1,9 +1,17 @@
 import yaml from 'js-yaml';
 
 const parse = (data, format) => {
+  if (!data || typeof data !== 'string') {
+    throw new Error('Data is not a valid string');
+  }
+
   switch (format) {
     case 'json':
-      return JSON.parse(data);
+      try {
+        return JSON.parse(data);
+      } catch (error) {
+        throw new Error('Invalid JSON format');
+      }
     case 'yml':
     case 'yaml':
       return yaml.load(data);
