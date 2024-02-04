@@ -7,8 +7,8 @@ const stringify = (value) => {
   return _.isString(value) ? `'${value}'` : value;
 };
 
-const plain = (diffTree, ancestry = '') => {
-  const lines = diffTree.flatMap((node) => {
+const plain = (tree, ancestry = '') => {
+  const lines = tree.flatMap((node) => {
     const {
       key, status, value, oldValue, newValue, children,
     } = node;
