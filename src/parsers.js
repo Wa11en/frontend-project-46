@@ -7,11 +7,7 @@ const parse = (data, format) => {
 
   switch (format) {
     case 'json':
-      try {
-        return JSON.parse(data);
-      } catch (error) {
-        throw new Error('Invalid JSON format');
-      }
+      return JSON.parse(data);
     case 'yml':
     case 'yaml':
       return yaml.load(data);
